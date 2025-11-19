@@ -1,3 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Pomegranate Detection{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Upload Pomegranate Image</h5>
+          <form id="uploadForm" method="post" enctype="multipart/form-data">
+            <div id="dropZone" class="upload-dropzone mb-3">
+              <input type="file" name="file" id="fileInput" accept="image/*" hidden>
+              <div class="drop-inner text-center p-4">
+                <p class="mb-2">Drag & drop an image here, or <button type="button" class="btn btn-link p-0" id="chooseFile">choose a file</button></p>
+                <img id="preview" class="img-fluid d-none rounded shadow-sm" alt="preview">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload & Detect</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Result</h5>
+          <div id="resultArea">
+            <p class="text-muted">Upload an image to see results here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+// reuse upload logic
+const drop = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+const chooseBtn = document.getElementById('chooseFile');
+const preview = document.getElementById('preview');
+const form = document.getElementById('uploadForm');
+const resultArea = document.getElementById('resultArea');
+chooseBtn.addEventListener('click', ()=>fileInput.click());
+drop.addEventListener('click', ()=>fileInput.click());
+fileInput.addEventListener('change', async (e)=>{ showPreview(e.target.files[0]); });
+['dragenter','dragover'].forEach(ev=> drop.addEventListener(ev, e=>{ e.preventDefault(); drop.classList.add('dragover'); }));
+['dragleave','drop'].forEach(ev=> drop.addEventListener(ev, e=>{ e.preventDefault(); drop.classList.remove('dragover'); }));
+drop.addEventListener('drop', e=>{ const f = e.dataTransfer.files[0]; fileInput.files = e.dataTransfer.files; showPreview(f); });
+function showPreview(file){ if(!file) return; const url = URL.createObjectURL(file); preview.src = url; preview.classList.remove('d-none'); }
+form.addEventListener('submit', async (ev)=>{ ev.preventDefault(); const f = fileInput.files[0]; if(!f){ alert('Choose a file first'); return; } const data = new FormData(); data.append('file', f); resultArea.innerHTML = '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>'; const res = await fetch('', {method:'POST', body: data}); const html = await res.text(); resultArea.innerHTML = html; });
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>

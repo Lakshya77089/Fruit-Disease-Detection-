@@ -1,3 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %}Home — FruitAI{% endblock %}
+
+{% block content %}
+  <div class="p-5 mb-4 rounded-3 hero bg-white shadow-sm">
+    <div class="container-fluid py-4">
+      <div class="row align-items-center">
+        <div class="col-md-7">
+          <h1 class="display-5 fw-bold">Fruit Ripeness & Disease Detection</h1>
+          <p class="lead text-muted">A lightweight local demo that detects fruits in images and classifies ripeness or disease using YOLO and classification models. Run it locally — no cloud needed.</p>
+
+          <div class="d-flex gap-2 mt-3">
+            <a class="btn btn-primary btn-lg" href="{{ url_for('fruit_detection') }}">Live Detection</a>
+            <a class="btn btn-outline-primary btn-lg" href="{{ url_for('disease_detection') }}">Upload & Detect</a>
+          </div>
+
+          <div class="mt-4">
+            <small class="text-muted">Quick status:</small>
+            <div class="mt-2">
+              <span class="badge bg-{{ 'success' if fruit_loaded else 'secondary' }} me-1">Fruit Model: {{ 'Loaded' if fruit_loaded else 'Missing' }}</span>
+              <span class="badge bg-{{ 'success' if banana_loaded else 'secondary' }} me-1">Banana Model: {{ 'Loaded' if banana_loaded else 'Missing' }}</span>
+              <span class="badge bg-{{ 'success' if mango_loaded else 'secondary' }} me-1">Mango Model: {{ 'Loaded' if mango_loaded else 'Missing' }}</span>
+              <span class="badge bg-{{ 'success' if pomogranate_loaded else 'secondary' }}">Pomegranate Model: {{ 'Loaded' if pomogranate_loaded else 'Missing' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-5 text-center">
+          <img src="https://imgs.search.brave.com/aBClpPXr25h4WXR-7WIjWjqB_bRD8O8FNQfaG6wbv8w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9iYXNr/ZXQtZmlsbGVkLXZp/YnJhbnQtZnJ1aXRz/LWluY2x1ZGluZy1w/aW5lYXBwbGUtbWFu/Z28tcG9tZWdyYW5h/dGUtYmFuYW5hcy1y/ZXN0cy13YXJtLXdv/b2Rlbi1mbG9vci1z/aG93Y2FzaW5nLTM1/NTk3Nzk5NC5qcGc" class="img-fluid rounded shadow-sm" alt="fruits">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 mb-4">
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Why use this?</h5>
+          <p class="card-text text-muted">Works locally with PyTorch & Ultralytics — no images leave your machine. Fast inference on CPU/GPU depending on your setup.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Key features</h5>
+          <ul class="mb-0 text-muted">
+            <li>Live camera detection (browser or server stream)</li>
+            <li>Image upload for fruit-specific classifiers</li>
+            <li>Lightweight & offline-friendly</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Quick start</h5>
+          <ol class="mb-0 text-muted small">
+            <li>Put your model weights under the `weights/` or `train*/weights/` folders.</li>
+            <li>Activate venv and install dependencies: <code>pip install -r requirements.txt</code>.</li>
+            <li>Run: <code>python app_4.py</code> and open <code>http://127.0.0.1:5000</code>.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Pro tip</h5>
+          <p class="text-muted mb-0">For best results, use good lighting and keep a single fruit centered in the frame. Want overlays in the browser? I can add client-side drawing of bounding boxes from detection JSON.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
 <!DOCTYPE html>
 <html lang="en">
 <head>

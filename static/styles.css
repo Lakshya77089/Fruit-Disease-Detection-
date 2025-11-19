@@ -1,0 +1,15 @@
+:root{
+  --brand:#0d6efd;
+}
+body{background:#f8fafc;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,'Helvetica Neue',Arial}
+.upload-dropzone{border:2px dashed rgba(13,110,253,0.15);border-radius:12px;background:#fff;cursor:pointer}
+.upload-dropzone.dragover{background:linear-gradient(90deg,rgba(13,110,253,0.03),rgba(13,110,253,0.02));box-shadow:0 8px 20px rgba(13,110,253,0.04)}
+.drop-inner p{margin:0}
+.ratio video{width:100%;height:100%;object-fit:cover}
+.card img{object-fit:cover;height:180px}
+.navbar-brand{font-weight:700}
+
+/* small screens spacing */
+@media (max-width:576px){
+  .card img{height:140px}
+}

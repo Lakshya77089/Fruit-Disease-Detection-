@@ -1,3 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Uploaded Image{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h5 class="card-title">Uploaded Image</h5>
+          {% if img_str %}
+            <img src="data:image/jpeg;base64,{{ img_str }}" class="img-fluid rounded" alt="uploaded">
+          {% elif filename %}
+            <img src="{{ url_for('static', filename='uploads/' ~ filename) }}" class="img-fluid rounded" alt="uploaded">
+          {% else %}
+            <p class="text-muted">No image available.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Detection Results</h5>
+          {% if class_names %}
+            <ul class="list-group list-group-flush">
+              {% for c in class_names %}
+                <li class="list-group-item">{{ c }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted">No results to show.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
 <!DOCTYPE html>
 <html lang="en">
 <head>

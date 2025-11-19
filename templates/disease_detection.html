@@ -1,3 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Disease Detection{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-12 mb-3">
+      <h3>Upload images for disease/ripeness detection</h3>
+      <p class="text-muted">Select a fruit below to upload an image and run the corresponding classifier.</p>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <img src="https://images.unsplash.com/photo-1574226516831-e1dff420e8f8?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=cdc" class="card-img-top" alt="banana">
+        <div class="card-body">
+          <h5 class="card-title">Banana</h5>
+          <p class="card-text">Upload a banana image to detect disease or ripeness.</p>
+          <a href="{{ url_for('banana_detection') }}" class="btn btn-primary">Upload</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=0b1" class="card-img-top" alt="mango">
+        <div class="card-body">
+          <h5 class="card-title">Mango</h5>
+          <p class="card-text">Upload a mango image to detect disease or ripeness.</p>
+          <a href="{{ url_for('mango_detection') }}" class="btn btn-primary">Upload</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=abc" class="card-img-top" alt="pomegranate">
+        <div class="card-body">
+          <h5 class="card-title">Pomegranate</h5>
+          <p class="card-text">Upload a pomegranate image to detect disease or ripeness.</p>
+          <a href="{{ url_for('pomogranate_detection') }}" class="btn btn-primary">Upload</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
